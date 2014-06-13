@@ -29,7 +29,7 @@ function draw_init() {
   prop.draw.sun.position.clone(prop.environment.sun_direction);
   prop.draw.scene.earth.add(prop.draw.sun);
 
-  prop.draw.camera.position.z=100;
+  prop.draw.camera.position.z=70;
   prop.draw.camera.position.y=50;
   prop.draw.camera.lookAt(new THREE.Vector3(0,0,0));
 
@@ -74,6 +74,10 @@ function draw_update() {
   if(prop.draw.dragon) {
     prop.draw.dragon.rotation.x+=0.01;
     prop.draw.dragon.rotation.z+=0.01;
+  }
+  if(prop.draw.iss) {
+    prop.draw.iss.rotation.x+=0.001;
+    prop.draw.iss.rotation.z+=0.001;
   }
   $("#fps").text(prop.time.fps.toFixed(0));
 }
