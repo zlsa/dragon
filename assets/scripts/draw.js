@@ -19,7 +19,9 @@ function draw_init() {
 
   prop.draw.camera=new THREE.PerspectiveCamera(prop.draw.fov,prop.draw.size.width/prop.draw.size.height,prop.draw.znear,prop.draw.zfar);
 
-  prop.draw.renderer=new THREE.WebGLRenderer();
+  prop.draw.renderer=new THREE.WebGLRenderer({
+    antialias:true,
+  });
   prop.draw.renderer.setSize(prop.draw.size.width,prop.draw.size.height);
   $("body #view").append(prop.draw.renderer.domElement);
 
