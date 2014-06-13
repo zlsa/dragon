@@ -11,3 +11,7 @@ html {
     background-color: #ddd;
     font-family: sans-serif;
 }
+
+html, body, #view, #view * {
+  overflow: hidden;
+}
