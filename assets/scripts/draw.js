@@ -29,8 +29,8 @@ function draw_init() {
   prop.draw.sun.position.clone(prop.environment.sun_direction);
   prop.draw.scene.earth.add(prop.draw.sun);
 
-  prop.draw.camera.position.z=10;
-  prop.draw.camera.position.y=5;
+  prop.draw.camera.position.z=100;
+  prop.draw.camera.position.y=50;
   prop.draw.camera.lookAt(new THREE.Vector3(0,0,0));
 
   var c=new Content({
@@ -40,6 +40,16 @@ function draw_init() {
       console.log("done",data);
       prop.draw.scene.earth.add(data);
       prop.draw.dragon=data;
+    }
+  });
+
+  var c=new Content({
+    url:"assets/model/iss/exports/iss.js",
+    type:"threejs",
+    callback:function(status,data) {
+      console.log("done",data);
+      prop.draw.scene.earth.add(data);
+      prop.draw.iss=data;
     }
   });
 }
