@@ -4,7 +4,8 @@ function load_init() {
 }
 
 function load_ready() {
-  console.log("redy");
-  $("#load").fadeOut(1000);
-  $("#load").css("pointerEvents","none");
+  setTimeout(function() {
+    $("#load").fadeOut(2000);
+    $("#load").css("pointerEvents","none");
+  },1000);
 }

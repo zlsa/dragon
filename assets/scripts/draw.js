@@ -29,8 +29,8 @@ function draw_init() {
   prop.draw.sun.position.clone(prop.environment.sun_direction);
   prop.draw.scene.earth.add(prop.draw.sun);
 
-  prop.draw.camera.position.z=70;
-  prop.draw.camera.position.y=50;
+  prop.draw.camera.position.z=7;
+  prop.draw.camera.position.y=5;
   prop.draw.camera.lookAt(new THREE.Vector3(0,0,0));
 
   var c=new Content({
@@ -43,15 +43,15 @@ function draw_init() {
     }
   });
 
-  var c=new Content({
-    url:"assets/model/iss/exports/iss.js",
-    type:"threejs",
-    callback:function(status,data) {
-      console.log("done",data);
-      prop.draw.scene.earth.add(data);
-      prop.draw.iss=data;
-    }
-  });
+  // var c=new Content({
+  //   url:"assets/model/iss/exports/iss.js",
+  //   type:"threejs",
+  //   callback:function(status,data) {
+  //     console.log("done",data);
+  //     prop.draw.scene.earth.add(data);
+  //     prop.draw.iss=data;
+  //   }
+  // });
 }
 
 function draw_resize() {
@@ -72,12 +72,10 @@ function draw_resize() {
 function draw_update() {
   prop.draw.renderer.render(prop.draw.scene.earth,prop.draw.camera);
   if(prop.draw.dragon) {
-    prop.draw.dragon.rotation.x+=0.01;
-    prop.draw.dragon.rotation.z+=0.01;
-  }
-  if(prop.draw.iss) {
-    prop.draw.iss.rotation.x+=0.001;
-    prop.draw.iss.rotation.z+=0.001;
+//    prop.draw.dragon.rotation.x+=0.01;
+//    prop.draw.dragon.rotation.z+=0.01;
+    prop.physics.dragon.position.copy(prop.draw.dragon.position);
+    prop.physics.dragon.quaternion.copy(prop.draw.dragon.quaternion);
   }
   $("#fps").text(prop.time.fps.toFixed(0));
 }

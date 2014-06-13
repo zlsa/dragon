@@ -8,7 +8,13 @@ var MODULES=[
   "three.min",
   "cannon.min",
 
+  "input",
+
   "get",
+
+  "physics",
+
+  "ship",
 
   "environment",
   "draw",
