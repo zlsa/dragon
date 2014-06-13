@@ -25,6 +25,17 @@ var Content=function(options) {
       .fail(that.dl_fail);
   };
 
+  this.getThreeJSON=function() {
+//    log("Getting ThreeJS model file "+this.url+"...",LOG_DEBUG);
+    var that=this;
+    that.loader=new THREE.JSONLoader();
+    that.loader.load(that.url,function(geometry,materials) {
+      var material=new THREE.MeshFaceMaterial(materials);
+      that.data=new THREE.Mesh(geometry,material);
+      that.dl_done(that.data);
+    });
+  };
+
   this.getString=function() {
 //    log("Getting plain file "+this.url+"...",LOG_DEBUG);
     $.get(this.url)
@@ -70,7 +81,6 @@ var Content=function(options) {
 //    log("Downloaded "+that.url,LOG_DEBUG);
     if(that.callback)
       that.callback.call(that.that,"ok",data,that.payload);
-    load_item_done();
     get_queue_check();
   };
 
@@ -87,7 +97,6 @@ var Content=function(options) {
         that.callback.call(that.that,"fail",data,that.payload);
       that.status="fail";
       get_queue_check();
-      load_item_done();
     } else {
       setTimeout(function() {
         that.get(); // try again
@@ -108,14 +117,17 @@ var Content=function(options) {
         that.getImage();
       else if(that.type == "audio")
         that.getAudio();
+      else if(that.type == "threejs")
+        that.getThreeJSON();
+      else
+        log("Unknown data type "+that.type,LOG_FATAL);
     },0);
   };
 
-  load_item_add();
   get_queue_add(this);
 };
 
-function get_pre() {
+function get_init_pre() {
   prop.get={};
   prop.get.queue=[];
 

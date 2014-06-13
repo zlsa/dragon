@@ -8,10 +8,11 @@ var MODULES=[
   "three.min",
   "cannon.min",
 
+  "get",
+
   "environment",
   "draw",
 
-//  "get",
 //  "canvas",
 //  "load"
 ];

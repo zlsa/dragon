@@ -5,7 +5,7 @@ function draw_init_pre() {
   prop.draw.fov=60;
 
   prop.draw.znear=0.1;
-  prop.draw.zfar=100;
+  prop.draw.zfar=200;
 
   prop.draw.size={
     width:128,
@@ -17,20 +17,29 @@ function draw_init() {
   prop.draw.scene={};
   prop.draw.scene.earth=new THREE.Scene();
 
-  prop.draw.camera=new THREE.PerspectiveCamera(prop.draw.fov,prop.draw.size.width,prop.draw.size.height,prop.draw.znear,prop.draw.zfar);
+  prop.draw.camera=new THREE.PerspectiveCamera(prop.draw.fov,prop.draw.size.width/prop.draw.size.height,prop.draw.znear,prop.draw.zfar);
 
   prop.draw.renderer=new THREE.WebGLRenderer();
   prop.draw.renderer.setSize(prop.draw.size.width,prop.draw.size.height);
   $("body #view").append(prop.draw.renderer.domElement);
 
-  var geometry=new THREE.BoxGeometry(1,1,1);
-  var material=new THREE.MeshBasicMaterial({
-    color: 0x00ff00
-  });
-  var cube=new THREE.Mesh(geometry,material);
-  prop.draw.scene.earth.add(cube);
+  prop.draw.sun=new THREE.DirectionalLight( 0xffffff,2);
+  prop.draw.sun.position.clone(prop.environment.sun_direction);
+  prop.draw.scene.earth.add(prop.draw.sun);
 
-  prop.draw.camera.position.z=5;
+  prop.draw.camera.position.z=10;
+  prop.draw.camera.position.y=5;
+  prop.draw.camera.lookAt(new THREE.Vector3(0,0,0));
+
+  var c=new Content({
+    url:"assets/model/dragon-v2/exports/dragon-v2.js",
+    type:"threejs",
+    callback:function(status,data) {
+      console.log("done",data);
+      prop.draw.cube=data;
+      prop.draw.scene.earth.add(data);
+    }
+  });
 }
 
 function draw_resize() {
@@ -50,4 +59,6 @@ function draw_resize() {
 
 function draw_update() {
   prop.draw.renderer.render(prop.draw.scene.earth,prop.draw.camera);
+  prop.draw.cube.rotation.x+=0.01;
+  prop.draw.cube.rotation.z+=0.01;
 }
