@@ -6,7 +6,8 @@ var MODULES=[
   "-util",
   "-animation",
   "three.min",
-  "cannon.min",
+//  "cannon.min",
+  "cannon",
 
   "input",
 

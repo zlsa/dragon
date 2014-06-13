@@ -6,9 +6,11 @@ var Ship=function() {
   this.rotate_input=[0,0,0];
   this.translate_input=[0,0,0];
 
-  this.applyThruster=function(pos,force) {
+  this.applyThruster=function(pos,vec) {
     var worldPoint=pos.copy();
     worldPoint.vadd(prop.physics.dragon.position,new CANNON.Vec3());
+    var force=vec.copy();
+    force=new CANNON.Vec3().vadd(force,prop.physics.dragon.quaternion.toEuler(new CANNON.Vec3()));
     prop.physics.dragon.applyImpulse(worldPoint,force);
   };
   
@@ -20,12 +22,12 @@ var Ship=function() {
     this.applyThruster(new CANNON.Vec3(-r,0,0),new CANNON.Vec3(0,Math.max(-f*t,0),0));
 
     t=this.rotate_input[1];
-    this.applyThruster(new CANNON.Vec3(r,0,0),new CANNON.Vec3(0,0,Math.max(f*t,0)));  // rotation
-    this.applyThruster(new CANNON.Vec3(-r,0,0),new CANNON.Vec3(0,0,Math.max(-f*t,0)));
+//    this.applyThruster(new CANNON.Vec3(r,0,0),new CANNON.Vec3(0,0,Math.max(f*t,0)));  // rotation
+//    this.applyThruster(new CANNON.Vec3(-r,0,0),new CANNON.Vec3(0,0,Math.max(-f*t,0)));
 
     t=this.rotate_input[2];
-    this.applyThruster(new CANNON.Vec3(0,0,r),new CANNON.Vec3(0,Math.max(f*t,0),0));  // front and back
-    this.applyThruster(new CANNON.Vec3(0,0,-r),new CANNON.Vec3(0,Math.max(-f*t,0),0));
+//    this.applyThruster(new CANNON.Vec3(0,0,r),new CANNON.Vec3(0,Math.max(f*t,0),0));  // front and back
+//    this.applyThruster(new CANNON.Vec3(0,0,-r),new CANNON.Vec3(0,Math.max(-f*t,0),0));
   }
 
   var sphereShape=new CANNON.Sphere(this.radius);
