@@ -63,4 +63,5 @@ function draw_update() {
     prop.draw.dragon.rotation.x+=0.01;
     prop.draw.dragon.rotation.z+=0.01;
   }
+  $("#fps").text(prop.time.fps.toFixed(0));
 }
