@@ -5,6 +5,9 @@
 var MODULES=[
   "-util",
   "-animation",
+  "three.min",
+  "cannon.min",
+  "draw",
 //  "get",
 //  "canvas",
 //  "load"
