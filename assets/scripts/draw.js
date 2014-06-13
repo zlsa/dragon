@@ -36,8 +36,8 @@ function draw_init() {
     type:"threejs",
     callback:function(status,data) {
       console.log("done",data);
-      prop.draw.cube=data;
       prop.draw.scene.earth.add(data);
+      prop.draw.dragon=data;
     }
   });
 }
@@ -59,6 +59,8 @@ function draw_resize() {
 
 function draw_update() {
   prop.draw.renderer.render(prop.draw.scene.earth,prop.draw.camera);
-  prop.draw.cube.rotation.x+=0.01;
-  prop.draw.cube.rotation.z+=0.01;
+  if(prop.draw.dragon) {
+    prop.draw.dragon.rotation.x+=0.01;
+    prop.draw.dragon.rotation.z+=0.01;
+  }
 }
